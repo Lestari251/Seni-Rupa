@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBT Seni Rupa Kelas 5 - Menggambar Ritme</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Fredoka -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Fredoka', 'cursive'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f3ff',
+                            100: '#e0e7ff',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .font-display {
+            font-family: 'Fredoka', cursive;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-indigo-600 flex items-center justify-center text-white shadow-md shadow-indigo-200">
+                    <i class="fa-solid fa-palette text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-display font-bold text-lg sm:text-xl text-slate-800 leading-tight">CBT Seni Rupa SD</h1>
+                    <p class="text-xs text-slate-500 font-medium">Kelas 5 • Materi: Menggambar Ritme</p>
+                </div>
+            </div>
+
+            <!-- Role Switcher & Share Button -->
+            <div class="flex items-center space-x-2">
+                <button onclick="openShareModal()" class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200 text-xs sm:text-sm font-bold transition-all duration-200 flex items-center space-x-1.5 shadow-sm">
+                    <i class="fa-solid fa-share-nodes text-emerald-600"></i>
+                    <span class="hidden sm:inline">Bagikan Ujian</span>
+                </button>
+                <div class="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200">
+                    <button id="btn-mode-siswa" onclick="switchView('siswa')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm">
+                        <i class="fa-solid fa-user-graduate mr-1.5"></i> Mode Siswa
+                    </button>
+                    <button id="btn-mode-guru" onclick="switchView('guru')" class="px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition-all duration-200">
+                        <i class="fa-solid fa-chalkboard-user mr-1.5"></i> Portal Guru
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+
+        <!-- ================= SISWA SECTION ================= -->
+        <section id="siswa-section" class="space-y-6">
+            
+            <!-- Step 1: Form Identitas Siswa -->
+            <div id="student-login-card" class="max-w-md mx-auto bg-white rounded-2xl shadow-sm border border-slate-200 p-6 sm:p-8">
+                <div class="text-center mb-6">
+                    <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl font-bold">
+                        <i class="fa-solid fa-file-pen"></i>
+                    </div>
+                    <h2 class="text-xl font-bold text-slate-800">Ulangan Harian CBT</h2>
+                    <p class="text-sm text-slate-500 mt-1">Seni Rupa Bab 2: Menggambar Ritme dalam Karya Seni</p>
+                </div>
+
+                <form onsubmit="startExam(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Nama Lengkap Siswa</label>
+                        <input type="text" id="student-name" required placeholder="Contoh: Anisa Rahmawati" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Nomor Absen</label>
+                            <input type="number" id="student-no" required min="1" max="50" placeholder="1-40" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">Kelas</label>
+                            <select id="student-class" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm bg-white">
+                                <option value="5A">Kelas 5A</option>
+                                <option value="5B">Kelas 5B</option>
+                                <option value="5C">Kelas 5C</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1">PIN Ujian Guru (Opsional)</label>
+                        <input type="text" id="student-pin" placeholder="Masukkan PIN (misal: RITME5)" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition text-sm font-mono uppercase">
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-xs text-amber-800 flex items-start space-x-2">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600 text-sm mt-0.5"></i>
+                        <span>Jumlah Soal: <strong>10 Pilihan Ganda</strong> • Waktu: <strong>15 Menit</strong> • KKM: <strong>75</strong>. Kerjakan dengan jujur!</span>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg shadow-indigo-200 transition-all duration-200 flex items-center justify-center space-x-2 text-sm">
+                        <span>Mulai Kerjakan Ujian</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Step 2: CBT Interface (Hidden initially) -->
+            <div id="cbt-interface" class="hidden grid grid-cols-1 lg:grid-cols-4 gap-6">
+                <!-- Left/Top: Questions & Options (3 Cols) -->
+                <div class="lg:col-span-3 space-y-4">
+                    <!-- Top Info Bar -->
+                    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                            <span class="bg-indigo-100 text-indigo-700 font-bold px-3 py-1 rounded-lg text-sm" id="cbt-student-tag">
+                                Siswa: -
+                            </span>
+                            <span class="text-xs text-slate-500 hidden sm:inline" id="cbt-class-tag">Kelas 5A</span>
+                        </div>
+                        <div class="flex items-center space-x-2 bg-rose-50 border border-rose-200 px-3 py-1.5 rounded-xl text-rose-700 font-mono font-bold text-sm">
+                            <i class="fa-solid fa-clock text-rose-500 animate-pulse"></i>
+                            <span id="timer-display">15:00</span>
+                        </div>
+                    </div>
+
+                    <!-- Question Container -->
+                    <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+                            <span class="font-bold text-indigo-600 text-sm uppercase tracking-wide" id="question-number-title">Soal No. 1</span>
+                            <span class="text-xs text-slate-400">Bobot: 10 Poin</span>
+                        </div>
+
+                        <!-- Question Text -->
+                        <div class="text-slate-800 font-semibold text-base sm:text-lg leading-relaxed" id="question-text">
+                            Loading pertanyaan...
+                        </div>
+
+                        <!-- Options List -->
+                        <div class="space-y-3" id="options-container">
+                            <!-- Options injected dynamically -->
+                        </div>
+
+                        <!-- Bottom Controls -->
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <button onclick="navigateQuestion(-1)" id="btn-prev" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-600 hover:bg-slate-50 font-bold text-sm transition flex items-center space-x-2">
+                                <i class="fa-solid fa-chevron-left"></i>
+                                <span>Sebelumnya</span>
+                            </button>
+
+                            <label class="inline-flex items-center space-x-2 cursor-pointer bg-slate-100 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-700 hover:bg-slate-200 transition">
+                                <input type="checkbox" id="check-ragu" onchange="toggleRagu()" class="w-4 h-4 text-amber-500 rounded focus:ring-amber-400">
+                                <span class="text-amber-700"><i class="fa-solid fa-flag text-amber-500 mr-1"></i> Ragu-ragu</span>
+                            </label>
+
+                            <button onclick="navigateQuestion(1)" id="btn-next" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 font-bold text-sm transition flex items-center space-x-2">
+                                <span>Berikutnya</span>
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right/Side: Navigation Grid (1 Col) -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                        <h3 class="font-bold text-slate-800 text-sm border-b border-slate-100 pb-2">Navigasi Soal</h3>
+                        
+                        <div class="grid grid-cols-5 gap-2" id="question-nav-grid">
+                            <!-- Grid items generated by JS -->
+                        </div>
+
+                        <!-- Legend -->
+                        <div class="pt-3 border-t border-slate-100 space-y-1.5 text-xs text-slate-500 font-medium">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded bg-indigo-600"></span>
+                                <span>Sudah Dijawab</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded bg-amber-400"></span>
+                                <span>Ragu-ragu</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded bg-slate-200"></span>
+                                <span>Belum Dijawab</span>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <button onclick="confirmSubmitExam()" class="w-full mt-2 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl shadow-md transition flex items-center justify-center space-x-2 text-sm">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Selesai & Kirim</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Exam Result Modal / View (Hidden initially) -->
+            <div id="cbt-result-view" class="hidden max-w-3xl mx-auto bg-white rounded-2xl border border-slate-200 shadow-sm p-6 sm:p-8 space-y-6">
+                <div class="text-center space-y-2 border-b border-slate-100 pb-6">
+                    <div id="score-badge-icon" class="w-20 h-20 rounded-full flex items-center justify-center mx-auto text-3xl mb-2">
+                        <!-- Dynamic icon -->
+                    </div>
+                    <h2 class="text-2xl font-bold text-slate-800" id="result-title">Hasil Ulangan CBT</h2>
+                    <p class="text-sm text-slate-500" id="result-student-info">Anisa Rahmawati (Absen 12) - Kelas 5A</p>
+
+                    <div class="flex items-center justify-center space-x-6 py-4">
+                        <div class="bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl">
+                            <span class="text-xs uppercase font-bold text-slate-400 block">Nilai Akhir</span>
+                            <span class="text-4xl font-extrabold text-indigo-600 font-display" id="final-score-val">0</span>
+                        </div>
+                        <div class="bg-slate-50 border border-slate-200 px-6 py-3 rounded-2xl">
+                            <span class="text-xs uppercase font-bold text-slate-400 block">Status KKM (75)</span>
+                            <span class="text-lg font-bold" id="kkm-status-badge">TUNTAS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Detail Answers Review -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-slate-800 text-base flex items-center justify-between">
+                        <span>Pembahasan Soal & Jawaban</span>
+                        <span class="text-xs font-normal text-slate-500">Hijau = Benar • Merah = Salah</span>
+                    </h3>
+
+                    <div class="space-y-3 max-h-96 overflow-y-auto pr-2 custom-scrollbar" id="review-list">
+                        <!-- Injected via JS -->
+                    </div>
+                </div>
+
+                <div class="flex justify-center pt-4">
+                    <button onclick="resetStudentExam()" class="px-6 py-2.5 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition shadow">
+                        <i class="fa-solid fa-rotate-right mr-2"></i> Mengerjakan Ulang (Simulasi)
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= GURU PORTAL SECTION ================= -->
+        <section id="guru-section" class="hidden space-y-6">
+            
+            <!-- Dashboard Header Stats -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase">Total Peserta</p>
+                        <h3 class="text-2xl font-extrabold text-slate-800" id="stat-total-siswa">0</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase">Rata-rata Nilai</p>
+                        <h3 class="text-2xl font-extrabold text-slate-800" id="stat-avg-score">0</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase">Ketuntasan (≥75)</p>
+                        <h3 class="text-2xl font-extrabold text-slate-800" id="stat-pass-rate">0%</h3>
+                    </div>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex items-center space-x-4">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-slate-400 uppercase">Tertinggi / Terendah</p>
+                        <h3 class="text-xl font-extrabold text-slate-800"><span id="stat-high-score">0</span> / <span id="stat-low-score" class="text-slate-500">0</span></h3>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Material Analytics & Topic Breakdown -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+                <h3 class="font-bold text-slate-800 text-base flex items-center space-x-2">
+                    <i class="fa-solid fa-book-open text-indigo-600"></i>
+                    <span>Analisis Penguasaan Indikator Materi (Seni Rupa - Ritme)</span>
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="topic-analytics-container">
+                    <!-- Analytics Bars -->
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden space-y-4 p-6">
+                <!-- Filters & Search -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="flex items-center space-x-2 w-full sm:w-auto">
+                        <input type="text" id="teacher-search" oninput="renderTeacherTable()" placeholder="Cari nama siswa..." class="px-4 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none w-full sm:w-64">
+                        <select id="teacher-class-filter" onchange="renderTeacherTable()" class="px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-indigo-500 outline-none bg-white">
+                            <option value="ALL">Semua Kelas</option>
+                            <option value="5A">Kelas 5A</option>
+                            <option value="5B">Kelas 5B</option>
+                            <option value="5C">Kelas 5C</option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+                        <button onclick="exportCSV()" class="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl transition flex items-center space-x-1.5">
+                            <i class="fa-solid fa-file-excel text-emerald-600"></i>
+                            <span>Ekspor Nilai (CSV)</span>
+                        </button>
+                        <button onclick="addMockData()" class="px-3 py-2 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-bold text-xs rounded-xl transition flex items-center space-x-1.5">
+                            <i class="fa-solid fa-plus"></i>
+                            <span>Tambah Data Simulasi</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-600">
+                        <thead class="bg-slate-50 text-slate-700 font-bold uppercase text-xs border-y border-slate-200">
+                            <tr>
+                                <th class="py-3.5 px-4">No</th>
+                                <th class="py-3.5 px-4">Nama Siswa</th>
+                                <th class="py-3.5 px-4">Kelas</th>
+                                <th class="py-3.5 px-4">Absen</th>
+                                <th class="py-3.5 px-4">Waktu Selesai</th>
+                                <th class="py-3.5 px-4">Nilai</th>
+                                <th class="py-3.5 px-4">Status</th>
+                                <th class="py-3.5 px-4 text-center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="teacher-table-body" class="divide-y divide-slate-100">
+                            <!-- Injected JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Modal Detail Jawaban Siswa untuk Guru -->
+    <div id="detail-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 space-y-4 max-h-[90vh] flex flex-col shadow-xl">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div>
+                    <h3 class="font-bold text-lg text-slate-800" id="modal-student-name">Detail Jawaban Siswa</h3>
+                    <p class="text-xs text-slate-500" id="modal-student-info">-</p>
+                </div>
+                <button onclick="closeModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="overflow-y-auto space-y-3 custom-scrollbar flex-grow pr-1" id="modal-answers-list">
+                <!-- Content injected dynamically -->
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 text-right">
+                <button onclick="closeModal()" class="px-5 py-2 bg-slate-200 text-slate-700 font-bold rounded-xl text-sm hover:bg-slate-300 transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Bagikan Link Ujian ke Siswa (Peningkatan Aksesibilitas Share) -->
+    <div id="share-modal" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-lg w-full p-6 space-y-5 shadow-2xl border border-slate-100">
+            <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <div class="flex items-center space-x-2">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-lg">
+                        <i class="fa-solid fa-share-nodes"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-base text-slate-800">Bagikan Ujian CBT</h3>
+                        <p class="text-xs text-slate-500">Kirim tautan langsung ke siswa atau grup WA</p>
+                    </div>
+                </div>
+                <button onclick="closeShareModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4">
+                <!-- URL Input with Edit Ability -->
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Tautan / Link Ujian CBT</label>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="share-link-input" oninput="updateQRAndShareLinks()" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-mono text-slate-800 focus:ring-2 focus:ring-indigo-500 outline-none">
+                        <button onclick="copyShareLink()" class="px-4 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs rounded-xl transition flex-shrink-0 flex items-center space-x-1.5 shadow-sm">
+                            <i class="fa-solid fa-copy"></i>
+                            <span>Salin</span>
+                        </button>
+                    </div>
+                    <span class="text-[11px] text-slate-400 mt-1 block">*Link dapat disesuaikan jika menggunakan domain server sekolah tersendiri.</span>
+                </div>
+
+                <!-- Direct Action Buttons: WhatsApp & Native Share -->
+                <div class="grid grid-cols-2 gap-3">
+                    <a id="btn-share-wa" href="#" target="_blank" class="flex items-center justify-center space-x-2 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs shadow-sm transition">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>Kirim ke WhatsApp</span>
+                    </a>
+                    <button onclick="shareViaNative()" class="flex items-center justify-center space-x-2 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl font-bold text-xs shadow-sm transition">
+                        <i class="fa-solid fa-share"></i>
+                        <span>Bagikan (HP)</span>
+                    </button>
+                </div>
+
+                <!-- PIN Code Section -->
+                <div class="p-3.5 bg-amber-50 border border-amber-200 rounded-xl text-xs text-amber-900 flex items-center space-x-3">
+                    <i class="fa-solid fa-key text-2xl text-amber-600 flex-shrink-0"></i>
+                    <div>
+                        <p class="font-bold">Kode PIN Akses Ujian: <span class="font-mono text-sm bg-amber-200/90 px-2 py-0.5 rounded text-amber-950">RITME5</span></p>
+                        <p class="text-[11px] text-amber-700 mt-0.5">Siswa dapat memasukkan PIN ini saat mulai mengerjakan ujian.</p>
+                    </div>
+                </div>
+
+                <!-- QR Code Display -->
+                <div class="text-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                    <p class="text-xs font-bold text-slate-600">Scan QR Code untuk Membuka di Tablet/HP Siswa:</p>
+                    <div class="bg-white p-2 inline-block rounded-xl border border-slate-200 shadow-sm">
+                        <img id="qr-code-img" src="" alt="QR Code Ujian" class="w-32 h-32 mx-auto rounded-lg">
+                    </div>
+                </div>
+            </div>
+
+            <div id="copy-toast" class="hidden p-2.5 bg-emerald-600 text-white text-xs font-bold rounded-xl text-center flex items-center justify-center space-x-2">
+                <i class="fa-solid fa-circle-check text-sm"></i>
+                <span>Tautan & Pesan Ujian Berhasil Disalin!</span>
+            </div>
+
+            <div class="pt-1">
+                <button onclick="closeShareModal()" class="w-full py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl text-sm transition">
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-white border-t border-slate-200 py-4 mt-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-400">
+            CBT Seni Rupa Kelas 5 SD • Menggambar Ritme (Repetisi, Alternasi, Gradasi, Mengalir) • Kurikulum Merdeka
+        </div>
+    </footer>
+
+    <script>
+        // ================= QUESTION BANK (10 SOAL SENI RUPA KELAS 5 - RITME) =================
+        const questionBank = [
+            {
+                id: 1,
+                topic: "Teknik Menggambar Ritme",
+                question: "Apa yang dimaksud dengan ritme (irama) dalam karya seni rupa?",
+                options: [
+                    "A. Campuran warna gelap dan terang secara acak",
+                    "B. Pengulangan unsur-unsur seni rupa secara teratur dan berkesinambungan",
+                    "C. Garis lurus tegak yang digambar menggunakan penggaris",
+                    "D. Gambar pemandangan alam yang sangat luas"
+                ],
+                answer: 1, // B
+                explanation: "Ritme dalam seni rupa adalah pengulangan unsur visual (garis, bentuk, warna) secara teratur sehingga menciptakan kesan gerak dan keharmonisan."
+            },
+            {
+                id: 2,
+                topic: "Teknik Menggambar Ritme",
+                question: "Menggambar bentuk daun yang sama persis secara berulang-ulang dengan jarak yang rata dinamakan teknik ritme...",
+                options: [
+                    "A. Repetisi (Pengulangan murni)",
+                    "B. Alternasi (Peralihan)",
+                    "C. Gradasi (Perubahan bertahap)",
+                    "D. Asimetris"
+                ],
+                answer: 0, // A
+                explanation: "Teknik Repetisi adalah pengulangan bentuk, ukuran, atau warna yang sama persis secara konstan/teratur."
+            },
+            {
+                id: 3,
+                topic: "Teknik Menggambar Ritme",
+                question: "Jika kamu menggambar bentuk lingkaran dari ukuran paling kecil, sedang, hingga sangat besar secara berurutan, kamu sedang menerapkan teknik ritme...",
+                options: [
+                    "A. Oposisi",
+                    "B. Gradasi (Progresi)",
+                    "C. Repetisi konstan",
+                    "D. Acak"
+                ],
+                answer: 1, // B
+                explanation: "Teknik Gradasi (Progresi) terjadi saat bentuk/ukuran/warna berubah secara bertahap (misal dari kecil ke besar atau terang ke gelap)."
+            },
+            {
+                id: 4,
+                topic: "Teknik Menggambar Ritme",
+                question: "Menyusun pola gambar secara bergantian, seperti: Segitiga - Lingkaran - Segitiga - Lingkaran, merupakan penerapan teknik ritme...",
+                options: [
+                    "A. Repetisi tunggal",
+                    "B. Alternasi (Peralihan bergantian)",
+                    "C. Mengalir (Flowing)",
+                    "D. Gradasi warna"
+                ],
+                answer: 1, // B
+                explanation: "Alternasi adalah teknik ritme yang menyusun dua atau lebih bentuk/unsur secara bergantian secara berurutan."
+            },
+            {
+                id: 5,
+                topic: "Teknik Menggambar Ritme",
+                question: "Contoh ritme yang meniru gerak alami seperti gelombang ombak laut atau aliran air sungai dinamakan ritme...",
+                options: [
+                    "A. Kaku",
+                    "B. Patah-patah",
+                    "C. Mengalir (Flowing)",
+                    "D. Statis"
+                ],
+                answer: 2, // C
+                explanation: "Ritme Mengalir (Flowing rhythm) mengarahkan mata mengikuti garis lekukan gemulai seperti gerakan air, ombak, atau angin."
+            },
+            {
+                id: 6,
+                topic: "Persiapan Menggambar Ritme",
+                question: "Sebelum mulai menggambar ritme di kertas gambar, alat utama yang disiapkan untuk membuat pola dasar dan garis kisi pembantu adalah...",
+                options: [
+                    "A. Gunting dan lem kertas",
+                    "B. Pensil dan penggaris",
+                    "C. Cat minyak dan kuas besar",
+                    "D. Kertas warna-warni"
+                ],
+                answer: 1, // B
+                explanation: "Pensil dan penggaris adalah alat utama untuk membuat sketsa garis pembantu/grid agar pengulangan motif teratur dan rapi."
+            },
+            {
+                id: 7,
+                topic: "Persiapan Menggambar Ritme",
+                question: "Lani ingin menggambar ritme bertema 'Keindahan Bawah Laut'. Langkah awal dalam persiapan menentukan ide/gagasan yang tepat adalah...",
+                options: [
+                    "A. Menentukan objek utama (seperti ikan/rumput laut) dan susunan pengulangannya",
+                    "B. Langsung mewarnai seluruh kertas dengan warna hitam pekat",
+                    "C. Menggunting kertas gambar menjadi bentuk segitiga",
+                    "D. Membeli bingkai foto terlebih dahulu"
+                ],
+                answer: 0, // A
+                explanation: "Tahap persiapan ide meliputi penentuan objek motif utama yang akan diulang serta perencanaan pola ritmenya."
+            },
+            {
+                id: 8,
+                topic: "Langkah-langkah Menggambar Ritme",
+                question: "Langkah pertama yang tepat pada bidang kertas saat mulai menggambar ritme agar motif tersusun rapi adalah...",
+                options: [
+                    "A. Langsung memberi cat air yang tebal",
+                    "B. Membuat garis pandu / grid halus menggunakan pensil",
+                    "C. Menuliskan nama dan tanda tangan di tengah kertas",
+                    "D. Menempelkan pita renda di pinggir kertas"
+                ],
+                answer: 1, // B
+                explanation: "Langkah awal menggambar ritme adalah membuat garis pandu/grid halus sebagai panduan tempat meletakkan motif yang diulang."
+            },
+            {
+                id: 9,
+                topic: "Langkah-langkah Menggambar Ritme",
+                question: "Setelah garis pandu dan motif utama dibuat, langkah berikutnya dalam menggambar ritme adalah...",
+                options: [
+                    "A. Menghapus semua garis dan motif",
+                    "B. Mengulang motif utama pada setiap kisi grid sesuai teknik ritme yang dipilih",
+                    "C. Meremas kertas gambar sampai melengkung",
+                    "D. Menyimpan gambar di dalam lemari"
+                ],
+                answer: 1, // B
+                explanation: "Setelah motif dasar dibuat, langkah selanjutnya adalah menduplikasi/mengulang motif tersebut pada pola grid yang tersedia."
+            },
+            {
+                id: 10,
+                topic: "Langkah-langkah Menggambar Ritme",
+                question: "Tahap akhir (finishing) dalam menggambar ritme agar hasil karya terlihat bersih, rapi, dan menarik adalah...",
+                options: [
+                    "A. Menghapus garis pandu pensil dan memberikan pewarnaan yang harmonis",
+                    "B. Membasahi seluruh kertas gambar dengan air sabun",
+                    "C. Coret-coret acak di luar bidang gambar",
+                    "D. Memotong-motong kertas gambar menjadi kecil"
+                ],
+                answer: 0, // A
+                explanation: "Finishing dilakukan dengan merapikan/menghapus garis pembantu pensil lalu memberi warna kontras atau harmonis agar ritme semakin menonjol."
+            }
+        ];
+
+        // ================= STATE MANAGEMENT =================
+        let activeStudent = null;
+        let userAnswers = new Array(10).fill(null);
+        let raguFlags = new Array(10).fill(false);
+        let currentQuestionIdx = 0;
+        let timerInterval = null;
+        let timeRemaining = 15 * 60; // 15 mins
+
+        // Mock database for teacher portal
+        let studentResultsDB = [
+            { id: 1, name: "Budi Santoso", class: "5A", no: 5, score: 90, answers: [1,0,1,1,2,1,0,1,1,0], timeSpent: "09:40", timestamp: "10 Oct 2026, 08:15" },
+            { id: 2, name: "Siti Nurhaliza", class: "5A", no: 24, score: 100, answers: [1,0,1,1,2,1,0,1,1,0], timeSpent: "08:10", timestamp: "10 Oct 2026, 08:20" },
+            { id: 3, name: "Deni Pratama", class: "5B", no: 11, score: 70, answers: [1,0,0,1,1,1,0,1,0,0], timeSpent: "12:15", timestamp: "10 Oct 2026, 08:22" },
+            { id: 4, name: "Eka Rahmawati", class: "5A", no: 8, score: 80, answers: [1,0,1,1,2,0,0,1,1,0], timeSpent: "10:05", timestamp: "10 Oct 2026, 08:30" },
+            { id: 5, name: "Fajar Nugraha", class: "5C", no: 15, score: 60, answers: [0,0,1,0,2,1,1,1,0,0], timeSpent: "14:50", timestamp: "10 Oct 2026, 08:35" }
+        ];
+
+        window.onload = function() {
+            renderTeacherTable();
+            renderTeacherStats();
+
+            // Check URL query string for auto mode switch
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('mode') === 'siswa') {
+                switchView('siswa');
+            }
+        };
+
+        function switchView(view) {
+            const btnSiswa = document.getElementById('btn-mode-siswa');
+            const btnGuru = document.getElementById('btn-mode-guru');
+            const secSiswa = document.getElementById('siswa-section');
+            const secGuru = document.getElementById('guru-section');
+
+            if (view === 'siswa') {
+                btnSiswa.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm";
+                btnGuru.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition-all duration-200";
+                secSiswa.classList.remove('hidden');
+                secGuru.classList.add('hidden');
+            } else {
+                btnGuru.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-200 bg-indigo-600 text-white shadow-sm";
+                btnSiswa.className = "px-3 sm:px-4 py-1.5 rounded-lg text-xs sm:text-sm font-semibold text-slate-600 hover:text-slate-900 transition-all duration-200";
+                secGuru.classList.remove('hidden');
+                secSiswa.classList.add('hidden');
+                
+                // Refresh teacher metrics
+                renderTeacherStats();
+                renderTeacherTable();
+            }
+        }
+
+        function startExam(e) {
+            e.preventDefault();
+            const name = document.getElementById('student-name').value.trim();
+            const no = document.getElementById('student-no').value;
+            const cls = document.getElementById('student-class').value;
+
+            if (!name || !no) return;
+
+            activeStudent = { name, no, class: cls };
+            userAnswers = new Array(10).fill(null);
+            raguFlags = new Array(10).fill(false);
+            currentQuestionIdx = 0;
+            timeRemaining = 15 * 60;
+
+            // Update Header tags
+            document.getElementById('cbt-student-tag').textContent = `Siswa: ${name}`;
+            document.getElementById('cbt-class-tag').textContent = `Kelas ${cls} (Absen ${no})`;
+
+            // Switch display
+            document.getElementById('student-login-card').classList.add('hidden');
+            document.getElementById('cbt-interface').classList.remove('hidden');
+            document.getElementById('cbt-result-view').classList.add('hidden');
+
+            startTimer();
+            renderNavGrid();
+            loadQuestion(0);
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                let mins = Math.floor(timeRemaining / 60);
+                let secs = timeRemaining % 60;
+                document.getElementById('timer-display').textContent = 
+                    `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Waktu ujian telah habis! Jawaban kamu akan otomatis dikirim.");
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        function loadQuestion(idx) {
+            currentQuestionIdx = idx;
+            const q = questionBank[idx];
+
+            document.getElementById('question-number-title').textContent = `Soal No. ${idx + 1} dari 10 (${q.topic})`;
+            document.getElementById('question-text').textContent = q.question;
+
+            // Render options
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = userAnswers[idx] === optIdx;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => selectOption(optIdx);
+                btn.className = `w-full text-left p-4 rounded-xl border font-medium text-sm transition flex items-start space-x-3 ${
+                    isSelected 
+                    ? 'border-indigo-600 bg-indigo-50/80 text-indigo-900 ring-2 ring-indigo-500/20' 
+                    : 'border-slate-200 hover:bg-slate-50 text-slate-700'
+                }`;
+
+                btn.innerHTML = `
+                    <span class="w-6 h-6 rounded-full border ${isSelected ? 'bg-indigo-600 border-indigo-600 text-white' : 'border-slate-300 text-slate-400'} flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+                        ${String.fromCharCode(65 + optIdx)}
+                    </span>
+                    <span class="flex-grow">${optText.substring(3)}</span>
+                `;
+                container.appendChild(btn);
+            });
+
+            // Update Ragu checkbox
+            document.getElementById('check-ragu').checked = raguFlags[idx];
+
+            // Nav buttons state
+            document.getElementById('btn-prev').disabled = (idx === 0);
+            document.getElementById('btn-prev').style.opacity = (idx === 0) ? '0.5' : '1';
+            
+            if (idx === 9) {
+                document.getElementById('btn-next').innerHTML = `<span>Selesai</span> <i class="fa-solid fa-check"></i>`;
+            } else {
+                document.getElementById('btn-next').innerHTML = `<span>Berikutnya</span> <i class="fa-solid fa-chevron-right"></i>`;
+            }
+
+            renderNavGrid();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentQuestionIdx] = optIdx;
+            loadQuestion(currentQuestionIdx);
+        }
+
+        function toggleRagu() {
+            raguFlags[currentQuestionIdx] = document.getElementById('check-ragu').checked;
+            renderNavGrid();
+        }
+
+        function navigateQuestion(direction) {
+            let target = currentQuestionIdx + direction;
+            if (target >= 0 && target < 10) {
+                loadQuestion(target);
+            }
+        }
+
+        function jumpToQuestion(idx) {
+            loadQuestion(idx);
+        }
+
+        function renderNavGrid() {
+            const grid = document.getElementById('question-nav-grid');
+            grid.innerHTML = '';
+
+            for (let i = 0; i < 10; i++) {
+                const btn = document.createElement('button');
+                btn.onclick = () => jumpToQuestion(i);
+                
+                let bgClass = "bg-slate-100 border-slate-200 text-slate-600";
+                if (raguFlags[i]) {
+                    bgClass = "bg-amber-400 border-amber-500 text-white font-bold";
+                } else if (userAnswers[i] !== null) {
+                    bgClass = "bg-indigo-600 border-indigo-700 text-white font-bold";
+                }
+
+                if (i === currentQuestionIdx) {
+                    bgClass += " ring-2 ring-indigo-400 ring-offset-1";
+                }
+
+                btn.className = `w-10 h-10 rounded-xl border text-xs flex items-center justify-center transition shadow-sm ${bgClass}`;
+                btn.textContent = i + 1;
+                grid.appendChild(btn);
+            }
+        }
+
+        function confirmSubmitExam() {
+            const unanswered = userAnswers.filter(a => a === null).length;
+            let msg = "Apakah kamu yakin ingin menyelesaikan ulangan ini?";
+            if (unanswered > 0) {
+                msg = `Masih ada ${unanswered} soal yang belum dijawab! Yakin ingin mengirim?`;
+            }
+            if (confirm(msg)) {
+                submitExam();
+            }
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+
+            // Calculate Score
+            let correctCount = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questionBank[idx].answer) {
+                    correctCount++;
+                }
+            });
+
+            const finalScore = correctCount * 10;
+            const timeSpentSec = (15 * 60) - timeRemaining;
+            const minsSpent = Math.floor(timeSpentSec / 60);
+            const secsSpent = timeSpentSec % 60;
+            const formattedTimeSpent = `${minsSpent.toString().padStart(2, '0')}:${secsSpent.toString().padStart(2, '0')}`;
+
+            // Save to Teacher Database
+            const newRecord = {
+                id: Date.now(),
+                name: activeStudent.name,
+                class: activeStudent.class,
+                no: parseInt(activeStudent.no),
+                score: finalScore,
+                answers: [...userAnswers],
+                timeSpent: formattedTimeSpent,
+                timestamp: new Date().toLocaleString('id-ID', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })
+            };
+            studentResultsDB.unshift(newRecord);
+
+            // Show Result Screen
+            document.getElementById('cbt-interface').classList.add('hidden');
+            document.getElementById('cbt-result-view').classList.remove('hidden');
+
+            document.getElementById('result-student-info').textContent = 
+                `${activeStudent.name} (Absen ${activeStudent.no}) - Kelas ${activeStudent.class}`;
+            document.getElementById('final-score-val').textContent = finalScore;
+
+            const kkmBadge = document.getElementById('kkm-status-badge');
+            const iconBadge = document.getElementById('score-badge-icon');
+
+            if (finalScore >= 75) {
+                kkmBadge.textContent = "TUNTAS";
+                kkmBadge.className = "text-lg font-bold text-emerald-600";
+                iconBadge.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-3xl mb-2 bg-emerald-100 text-emerald-600";
+                iconBadge.innerHTML = `<i class="fa-solid fa-award"></i>`;
+            } else {
+                kkmBadge.textContent = "REMIDIAL";
+                kkmBadge.className = "text-lg font-bold text-rose-600";
+                iconBadge.className = "w-20 h-20 rounded-full flex items-center justify-center mx-auto text-3xl mb-2 bg-rose-100 text-rose-600";
+                iconBadge.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i>`;
+            }
+
+            // Render Answers Breakdown
+            const reviewList = document.getElementById('review-list');
+            reviewList.innerHTML = '';
+
+            questionBank.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.answer;
+
+                const item = document.createElement('div');
+                item.className = `p-4 rounded-xl border text-xs sm:text-sm space-y-1.5 ${
+                    isCorrect ? 'bg-emerald-50/60 border-emerald-200' : 'bg-rose-50/60 border-rose-200'
+                }`;
+
+                item.innerHTML = `
+                    <div class="flex items-start justify-between font-bold">
+                        <span class="${isCorrect ? 'text-emerald-800' : 'text-rose-800'}">
+                            Soal ${idx + 1}: ${q.question}
+                        </span>
+                        <span class="px-2 py-0.5 rounded text-xs uppercase ${isCorrect ? 'bg-emerald-200 text-emerald-800' : 'bg-rose-200 text-rose-800'}">
+                            ${isCorrect ? 'Benar (+10)' : 'Salah (0)'}
+                        </span>
+                    </div>
+                    <div class="text-slate-600">
+                        <strong>Jawaban Kamu:</strong> ${userAns !== null ? q.options[userAns] : '<i>Tidak dijawab</i>'}
+                    </div>
+                    <div class="text-slate-700 font-semibold">
+                        <strong>Kunci Jawaban:</strong> ${q.options[q.answer]}
+                    </div>
+                    <p class="text-slate-500 text-xs italic bg-white/80 p-2 rounded-lg border border-slate-100 mt-1">
+                        <i class="fa-solid fa-circle-info mr-1 text-indigo-500"></i> ${q.explanation}
+                    </p>
+                `;
+                reviewList.appendChild(item);
+            });
+        }
+
+        function resetStudentExam() {
+            document.getElementById('cbt-result-view').classList.add('hidden');
+            document.getElementById('student-login-card').classList.remove('hidden');
+            document.getElementById('student-name').value = '';
+        }
+
+        function renderTeacherStats() {
+            const total = studentResultsDB.length;
+            document.getElementById('stat-total-siswa').textContent = total;
+
+            if (total === 0) {
+                document.getElementById('stat-avg-score').textContent = "0";
+                document.getElementById('stat-pass-rate').textContent = "0%";
+                document.getElementById('stat-high-score').textContent = "0";
+                document.getElementById('stat-low-score').textContent = "0";
+                return;
+            }
+
+            const scores = studentResultsDB.map(s => s.score);
+            const avg = (scores.reduce((a, b) => a + b, 0) / total).toFixed(1);
+            const passed = scores.filter(s => s >= 75).length;
+            const passRate = Math.round((passed / total) * 100);
+            const max = Math.max(...scores);
+            const min = Math.min(...scores);
+
+            document.getElementById('stat-avg-score').textContent = avg;
+            document.getElementById('stat-pass-rate').textContent = `${passRate}%`;
+            document.getElementById('stat-high-score').textContent = max;
+            document.getElementById('stat-low-score').textContent = min;
+
+            renderTopicAnalytics();
+        }
+
+        function renderTopicAnalytics() {
+            const container = document.getElementById('topic-analytics-container');
+            container.innerHTML = '';
+
+            const topics = [
+                { name: "Teknik Menggambar Ritme", qIndices: [0, 1, 2, 3, 4] },
+                { name: "Persiapan Menggambar Ritme", qIndices: [5, 6] },
+                { name: "Langkah-Langkah Menggambar", qIndices: [7, 8, 9] }
+            ];
+
+            topics.forEach(t => {
+                let totalAttempts = 0;
+                let correctAttempts = 0;
+
+                studentResultsDB.forEach(st => {
+                    t.qIndices.forEach(qIdx => {
+                        totalAttempts++;
+                        if (st.answers[qIdx] === questionBank[qIdx].answer) {
+                            correctAttempts++;
+                        }
+                    });
+                });
+
+                const pct = totalAttempts > 0 ? Math.round((correctAttempts / totalAttempts) * 100) : 0;
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-50 border border-slate-200 p-4 rounded-xl space-y-2";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center text-xs font-bold text-slate-700">
+                        <span>${t.name}</span>
+                        <span class="text-indigo-600">${pct}% Paham</span>
+                    </div>
+                    <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div class="bg-indigo-600 h-2.5 rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+                    </div>
+                    <p class="text-[11px] text-slate-400">Berdasarkan ${t.qIndices.length} indikator soal</p>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function renderTeacherTable() {
+            const tbody = document.getElementById('teacher-table-body');
+            const search = document.getElementById('teacher-search').value.toLowerCase();
+            const classFilter = document.getElementById('teacher-class-filter').value;
+
+            tbody.innerHTML = '';
+
+            const filtered = studentResultsDB.filter(s => {
+                const matchName = s.name.toLowerCase().includes(search);
+                const matchClass = (classFilter === 'ALL') || (s.class === classFilter);
+                return matchName && matchClass;
+            });
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="8" class="text-center py-6 text-slate-400">
+                            Belum ada data nilai siswa.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            filtered.forEach((st, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition";
+                
+                const isPassed = st.score >= 75;
+
+                tr.innerHTML = `
+                    <td class="py-3 px-4 font-medium text-slate-400">${idx + 1}</td>
+                    <td class="py-3 px-4 font-bold text-slate-800">${st.name}</td>
+                    <td class="py-3 px-4"><span class="bg-slate-100 text-slate-700 px-2.5 py-1 rounded-lg text-xs font-semibold">${st.class}</span></td>
+                    <td class="py-3 px-4">${st.no}</td>
+                    <td class="py-3 px-4 text-xs font-mono text-slate-500">${st.timeSpent}</td>
+                    <td class="py-3 px-4 font-extrabold text-base ${isPassed ? 'text-indigo-600' : 'text-rose-600'}">${st.score}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold ${isPassed ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}">
+                            ${isPassed ? 'TUNTAS' : 'REMIDIAL'}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-center">
+                        <button onclick="viewStudentDetail(${st.id})" class="px-3 py-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-600 font-bold text-xs rounded-lg transition">
+                            <i class="fa-solid fa-eye mr-1"></i> Detail
+                        </button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function viewStudentDetail(id) {
+            const student = studentResultsDB.find(s => s.id === id);
+            if (!student) return;
+
+            document.getElementById('modal-student-name').textContent = `Detail Jawaban: ${student.name}`;
+            document.getElementById('modal-student-info').textContent = `Kelas ${student.class} • Absen ${student.no} • Nilai: ${student.score} • Waktu: ${student.timeSpent}`;
+
+            const container = document.getElementById('modal-answers-list');
+            container.innerHTML = '';
+
+            questionBank.forEach((q, idx) => {
+                const ans = student.answers[idx];
+                const isCorrect = ans === q.answer;
+
+                const div = document.createElement('div');
+                div.className = `p-3 rounded-xl border text-xs ${isCorrect ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}`;
+                div.innerHTML = `
+                    <div class="font-bold text-slate-800 mb-1">
+                        Soal ${idx + 1}: ${q.question}
+                    </div>
+                    <div class="text-slate-600">
+                        <strong>Dijawab:</strong> ${ans !== null ? q.options[ans] : '<i>Tidak dijawab</i>'}
+                    </div>
+                    <div class="text-slate-700 font-semibold">
+                        <strong>Kunci:</strong> ${q.options[q.answer]}
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            document.getElementById('detail-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
+
+        function addMockData() {
+            const mockNames = ["Rian Hidayat", "Larasati", "Ahmad Fauzi", "Bintang Samudra", "Nabila Putri"];
+            const classes = ["5A", "5B", "5C"];
+            const randomName = mockNames[Math.floor(Math.random() * mockNames.length)];
+            const randomClass = classes[Math.floor(Math.random() * classes.length)];
+            const randomNo = Math.floor(Math.random() * 30) + 1;
+
+            const mockAnswers = [];
+            let correct = 0;
+            for (let i = 0; i < 10; i++) {
+                const isRight = Math.random() > 0.3;
+                if (isRight) {
+                    mockAnswers.push(questionBank[i].answer);
+                    correct++;
+                } else {
+                    mockAnswers.push((questionBank[i].answer + 1) % 4);
+                }
+            }
+
+            const newMock = {
+                id: Date.now(),
+                name: `${randomName} (${Math.floor(Math.random()*100)})`,
+                class: randomClass,
+                no: randomNo,
+                score: correct * 10,
+                answers: mockAnswers,
+                timeSpent: "10:30",
+                timestamp: "Baru saja"
+            };
+
+            studentResultsDB.unshift(newMock);
+            renderTeacherStats();
+            renderTeacherTable();
+        }
+
+        function exportCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,No,Nama,Kelas,Absen,Nilai,Status,Waktu\n";
+            studentResultsDB.forEach((s, idx) => {
+                const status = s.score >= 75 ? "TUNTAS" : "REMIDIAL";
+                csvContent += `${idx + 1},"${s.name}",${s.class},${s.no},${s.score},${status},${s.timeSpent}\n`;
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Rekap_Nilai_CBT_Seni_Rupa_Kelas_5.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function openShareModal() {
+            let targetUrl = window.location.href;
+            
+            // Clean local/blob or about:blank URL fallback
+            if (targetUrl.includes('about:blank') || targetUrl.includes('blob:') || targetUrl.startsWith('file:')) {
+                targetUrl = 'https://cbt.sekolah.sch.id/ujian-seni-rupa-kelas5';
+            } else {
+                targetUrl = targetUrl.split('?')[0];
+            }
+
+            // Append mode parameter
+            if (!targetUrl.includes('?')) {
+                targetUrl += '?mode=siswa';
+            }
+
+            const shareInput = document.getElementById('share-link-input');
+            shareInput.value = targetUrl;
+
+            updateQRAndShareLinks();
+            document.getElementById('share-modal').classList.remove('hidden');
+        }
+
+        function updateQRAndShareLinks() {
+            const rawUrl = document.getElementById('share-link-input').value.trim();
+            const pinCode = "RITME5";
+
+            // Update QR Code image
+            const qrImg = document.getElementById('qr-code-img');
+            qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(rawUrl)}`;
+
+            // Update WhatsApp share link
+            const waMsg = `*Ulangan Harian CBT Seni Rupa Kelas 5*\nMateri: Menggambar Ritme\n\nSilakan klik tautan berikut untuk mengerjakan:\n${rawUrl}\n\n*Kode PIN Ujian:* ${pinCode}\nSelamat mengerjakan dengan jujur!`;
+            const waBtn = document.getElementById('btn-share-wa');
+            waBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(waMsg)}`;
+        }
+
+        function shareViaNative() {
+            const rawUrl = document.getElementById('share-link-input').value.trim();
+            const textMsg = `Ulangan Harian CBT Seni Rupa Kelas 5 (Kode PIN: RITME5)\nBuka link: ${rawUrl}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Ulangan CBT Seni Rupa Kelas 5',
+                    text: textMsg,
+                    url: rawUrl
+                }).catch((err) => {
+                    console.log('Share error or cancelled:', err);
+                });
+            } else {
+                copyShareLink();
+            }
+        }
+
+        function closeShareModal() {
+            document.getElementById('share-modal').classList.add('hidden');
+            document.getElementById('copy-toast').classList.add('hidden');
+        }
+
+        function copyShareLink() {
+            const input = document.getElementById('share-link-input');
+            const rawUrl = input.value.trim();
+            const fullMessage = `Ulangan CBT Seni Rupa Kelas 5\nLink: ${rawUrl}\nKode PIN: RITME5`;
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(fullMessage).then(() => {
+                    showCopyToast();
+                }).catch(() => {
+                    fallbackCopyExecCommand(input);
+                });
+            } else {
+                fallbackCopyExecCommand(input);
+            }
+        }
+
+        function fallbackCopyExecCommand(inputElement) {
+            inputElement.select();
+            inputElement.setSelectionRange(0, 99999);
+            try {
+                document.execCommand('copy');
+                showCopyToast();
+            } catch (err) {
+                alert('Gagal menyalin otomatis. Silakan salin teks secara manual.');
+            }
+        }
+
+        function showCopyToast() {
+            const toast = document.getElementById('copy-toast');
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
